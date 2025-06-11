@@ -1,0 +1,61 @@
+
+{% load static tailwind_tags %}
+{% load widget_tweaks %}
+{% load extras %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Application Submitted</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  {% tailwind_css %}
+</head>
+<body class="bg-blue-50 flex justify-center items-center h-screen">
+
+  <div class="bg-white p-8 rounded-lg shadow-xl max-w-xl w-full space-y-4">
+    <h1 class="text-2xl font-bold text-green-600">Registration Successful!</h1>
+    <p class="text-gray-700">Here are your submitted details:</p>
+
+    <ul class="text-gray-800 space-y-1">
+      <li><strong>Full Name:</strong> {{ application.name }}</li>
+      <li><strong>Date of Birth:</strong> {{ application.dob }}</li>
+      <li><strong>Gender:</strong> {{ application.gender }}</li>
+      <li><strong>Locality:</strong> {{ application.locality }}</li>
+      <li><strong>City:</strong> {{ application.city }}</li>
+      <li><strong>Pin Code:</strong> {{ application.pin }}</li>
+      <li><strong>State:</strong> {{ application.state }}</li>
+      <li><strong>Email:</strong> {{ application.email }}</li>
+      <li><strong>Preferred Job Cities:</strong> {{ application.job_city|parse_list|join:", " }}</li>
+    </ul>
+
+    {% if application.profile_pic %}
+      <p><strong>Profile Pic:</strong></p>
+      <img src="{{ application.profile_pic.url }}" alt="Profile Picture" class="h-32 rounded border" />
+    {% endif %}
+
+    {% if application.resume %}
+      <p class="mt-2"><strong>Resume:</strong> <a href="{{ application.resume.url }}" class="text-blue-600 underline" target="_blank">Download</a></p>
+    {% endif %}
+
+    <a href="{% url 'application' %}" class="inline-block mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">Submit Another</a>
+  </div>
+  
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const input = document.getElementById("id_profile_pic");
+    const preview = document.getElementById("profile-preview");
+
+    input.addEventListener("change", function () {
+      const file = input.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          preview.src = e.target.result;
+          preview.classList.remove("hidden");
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  });
+</script>
+</body>
+</html>

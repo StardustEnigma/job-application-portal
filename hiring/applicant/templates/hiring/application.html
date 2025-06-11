@@ -1,0 +1,180 @@
+{% load static tailwind_tags %}
+{% load widget_tweaks %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Application Form</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  {% tailwind_css %}
+</head>
+<body class="bg-gradient-to-br from-blue-50 via-white to-blue-100 text-gray-800 min-h-screen flex items-center justify-center px-4">
+
+  <form action="" method="POST" enctype="multipart/form-data"
+    class="bg-white p-10 rounded-xl shadow-xl w-full max-w-2xl space-y-6 border border-blue-200">
+
+    <h1 class="text-4xl font-bold text-center text-blue-700 mb-4">Application Form</h1>
+
+    {% csrf_token %}
+
+    {% if form.non_field_errors %}
+      <div class="bg-red-100 text-red-600 p-3 rounded">
+        {% for error in form.non_field_errors %}
+          <p class="text-sm">{{ error }}</p>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    
+    <!-- Full Name -->
+<!-- Full Name -->
+<div>
+  <label for="{{ form.name.id_for_label }}" class="block font-medium text-gray-700 mb-1">Full Name</label>
+  {{ form.name|add_class:"w-full border border-gray-300 rounded px-3 py-2" }}
+  {% if form.name.errors %}
+    <p class="text-sm text-red-600 mt-1">{{ form.name.errors.0 }}</p>
+  {% endif %}
+</div>
+
+<!-- Date of Birth -->
+<div>
+  <label for="{{ form.dob.id_for_label }}" class="block font-medium text-gray-700 mb-1">Date of Birth</label>
+  {{ form.dob|add_class:"w-full border border-gray-300 rounded px-3 py-2" }}
+  {% if form.dob.errors %}
+    <p class="text-sm text-red-600 mt-1">{{ form.dob.errors.0 }}</p>
+  {% endif %}
+</div>
+
+<!-- Gender -->
+<div>
+  <label class="block font-medium text-gray-700 mb-1">Gender</label>
+  {{ form.gender }}
+  {% if form.gender.errors %}
+    <p class="text-sm text-red-600 mt-1">{{ form.gender.errors.0 }}</p>
+  {% endif %}
+</div>
+
+<!-- Locality -->
+<div>
+  <label for="{{ form.locality.id_for_label }}" class="block font-medium text-gray-700 mb-1">Local Address / Locality</label>
+  {{ form.locality|add_class:"w-full border border-gray-300 rounded px-3 py-2" }}
+  {% if form.locality.errors %}
+    <p class="text-sm text-red-600 mt-1">{{ form.locality.errors.0 }}</p>
+  {% endif %}
+</div>
+
+<!-- City -->
+<div>
+  <label for="{{ form.city.id_for_label }}" class="block font-medium text-gray-700 mb-1">City</label>
+  {{ form.city|add_class:"w-full border border-gray-300 rounded px-3 py-2" }}
+  {% if form.city.errors %}
+    <p class="text-sm text-red-600 mt-1">{{ form.city.errors.0 }}</p>
+  {% endif %}
+</div>
+
+<!-- Pin Code -->
+<div>
+  <label for="{{ form.pin.id_for_label }}" class="block font-medium text-gray-700 mb-1">Pin Code</label>
+  {{ form.pin|add_class:"w-full border border-gray-300 rounded px-3 py-2" }}
+  {% if form.pin.errors %}
+    <p class="text-sm text-red-600 mt-1">{{ form.pin.errors.0 }}</p>
+  {% endif %}
+</div>
+
+<!-- State -->
+<div>
+  <label for="{{ form.state.id_for_label }}" class="block font-medium text-gray-700 mb-1">State</label>
+  {{ form.state|add_class:"w-full border border-gray-300 rounded px-3 py-2" }}
+  {% if form.state.errors %}
+    <p class="text-sm text-red-600 mt-1">{{ form.state.errors.0 }}</p>
+  {% endif %}
+</div>
+
+<!-- Email -->
+<div>
+  <label for="{{ form.email.id_for_label }}" class="block font-medium text-gray-700 mb-1">Email Address</label>
+  {{ form.email|add_class:"w-full border border-gray-300 rounded px-3 py-2" }}
+  {% if form.email.errors %}
+    <p class="text-sm text-red-600 mt-1">{{ form.email.errors.0 }}</p>
+  {% endif %}
+</div>
+
+<!-- Job City -->
+<div>
+  <label class="block font-medium text-gray-700 mb-1">Preferred Job City</label>
+  <div class="grid grid-cols-2 gap-2">
+    {% for checkbox in form.job_city %}
+      <label class="inline-flex items-center space-x-2">
+        {{ checkbox.tag }}
+        <span>{{ checkbox.choice_label }}</span>
+      </label>
+    {% endfor %}
+  </div>
+  {% if form.job_city.errors %}
+    <p class="text-sm text-red-600 mt-1">{{ form.job_city.errors.0 }}</p>
+  {% endif %}
+</div>
+
+
+<!-- Profile Picture -->
+<div>
+  <label class="block font-medium text-gray-700 mb-1">Profile Picture</label>
+  <input type="file" name="profile_pic" id="id_profile_pic"
+         class="file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-blue-100 file:text-blue-800 hover:file:bg-blue-200 text-sm text-gray-600">
+
+  <!-- 👇 Preview Image Here -->
+  <img id="profile-pic-preview" src="#" alt="Image Preview"
+       class="mt-4 h-32 w-32 object-cover rounded hidden border" />
+
+  {% if form.profile_pic.help_text %}
+    <p class="text-xs text-gray-500 mt-1">{{ form.profile_pic.help_text }}</p>
+  {% endif %}
+  {% if form.profile_pic.errors %}
+    <p class="text-sm text-red-600 mt-1">{{ form.profile_pic.errors.0 }}</p>
+  {% endif %}
+</div>
+
+<!-- Resume -->
+<div>
+  <label class="block font-medium text-gray-700 mb-1">Resume (PDF, DOCX)</label>
+  <input type="file" name="resume" id="id_resume"
+         class="file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-green-100 file:text-green-800 hover:file:bg-green-200 text-sm text-gray-600">
+  {% if form.resume.help_text %}
+    <p class="text-xs text-gray-500 mt-1">{{ form.resume.help_text }}</p>
+  {% endif %}
+  {% if form.resume.errors %}
+    <p class="text-sm text-red-600 mt-1">{{ form.resume.errors.0 }}</p>
+  {% endif %}
+</div>
+<!-- Submit Button -->
+<div class="pt-4">
+  <button type="submit"
+    class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 rounded-lg shadow-md transition duration-300">
+    Submit Application
+  </button>
+</div>
+
+
+  </form>
+<script>
+  document.getElementById('id_profile_pic').addEventListener('change', function(event) {
+    const preview = document.getElementById('profile-pic-preview');
+    const file = event.target.files[0];
+
+    if (file && file.type.startsWith('image/')) {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        preview.src = e.target.result;
+        preview.classList.remove('hidden');
+      }
+      reader.readAsDataURL(file);
+    } else {
+      preview.src = '#';
+      preview.classList.add('hidden');
+    }
+  });
+</script>
+</body>
+</html>
