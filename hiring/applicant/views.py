@@ -19,3 +19,8 @@ def application_success(request,pk):
 def Candidates(request):
     candidates=Application.objects.all()
     return render(request,'hiring/Employer.html',{'candidates':candidates})
+
+def Candidate_Detail(request,my_id):
+    candidates=Application.objects.get(id=my_id)
+    
+    return render(request,'hiring/candidate_view.html',{'candidates':candidates})

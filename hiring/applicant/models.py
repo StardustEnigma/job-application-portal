@@ -57,3 +57,4 @@ class Application(models.Model):
     job_city = models.JSONField(default=list)
     profile_pic=models.ImageField(upload_to='profileimg',blank=True)
     resume=models.FileField(upload_to='resume', blank=True)
+    

@@ -17,7 +17,7 @@
       <ul class="flex flex-col gap-4 items-center">
         {% for Candidate in candidates %}
           <li class="w-full max-w-xs bg-gray-50 border border-gray-300 rounded-lg px-6 py-5 hover:bg-blue-50 transition duration-300">
-            <a href="#" class="block text-blue-600 hover:underline text-lg font-semibold text-center">
+            <a href="{% url "profile"  my_id=Candidate.id %}" class="block text-blue-600 hover:underline text-lg font-semibold text-center">
               {{ Candidate.name }}  -  {{ Candidate.get_state_display}}
             </a>
           </li>

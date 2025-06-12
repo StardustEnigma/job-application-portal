@@ -6,5 +6,5 @@ urlpatterns = [
     path('application/',views.application,name='application'),
     path('application/success/<int:pk>/',views.application_success,name='application_success'),
     path('Employer/',views.Candidates,name='candidates'),
-    
+    path('Employer/<int:my_id>',views.Candidate_Detail,name='profile')
 ]
