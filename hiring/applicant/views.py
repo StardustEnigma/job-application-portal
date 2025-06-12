@@ -15,3 +15,7 @@ def application(request):
 def application_success(request,pk):
     application=get_object_or_404(Application,pk=pk)
     return render(request, 'hiring/application_success.html', {'application': application})
+
+def Candidates(request):
+    candidates=Application.objects.all()
+    return render(request,'hiring/Employer.html',{'candidates':candidates})

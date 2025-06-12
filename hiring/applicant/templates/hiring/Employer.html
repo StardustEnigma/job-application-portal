@@ -1,0 +1,32 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Candidates</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  {% tailwind_css %}
+</head>
+<body class="bg-gray-100 text-gray-800 min-h-screen flex items-center justify-center px-4 py-8">
+
+  <div class="w-full max-w-md bg-white shadow-lg rounded-xl p-6">
+    <h1 class="text-2xl font-bold mb-6 text-center text-blue-700">List of Candidates</h1>
+
+    {% if candidates %}
+      <ul class="flex flex-col gap-4 items-center">
+        {% for Candidate in candidates %}
+          <li class="w-full max-w-xs bg-gray-50 border border-gray-300 rounded-lg px-6 py-5 hover:bg-blue-50 transition duration-300">
+            <a href="#" class="block text-blue-600 hover:underline text-lg font-semibold text-center">
+              {{ Candidate.name }}  -  {{ Candidate.get_state_display}}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% else %}
+      <p class="text-center text-gray-500 text-sm">No candidates found.</p>
+    {% endif %}
+  </div>
+
+</body>
+</html>
