@@ -15,7 +15,7 @@
     <!-- Profile Picture -->
     {% if candidates.profile_pic %}
     <div class="flex justify-center mb-4">
-        <img src="{{ candidates.profile_pic.url }}" alt="Profile Picture" class="w-32 h-32 rounded-full object-cover border-4 border-indigo-500">
+        <img src="{{ candidates.profile_pic.url }}" alt="Profile Picture" class="w-32 h-32 rounded-full object-cover ">
     </div>
     {% endif %}
 
@@ -34,7 +34,7 @@
         <p><strong>Preferred Job Cities:</strong>
         {% for city in candidates.job_city %}
             <span class="inline-block bg-indigo-100 text-indigo-800 text-sm px-2 py-1 rounded mr-1">
-            {{ city|cut:" "}}
+            {{ city|cut:" " }}
             </span>
         {% endfor %}
         </p>
@@ -48,7 +48,16 @@
         </a>
     </div>
     {% endif %}
+
+    <!-- Call for Interview Button -->
+    <div class="mt-4 text-center">
+        <a href="#" class="inline-block bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700">
+            Call for Interview
+        </a>
+    </div>
+    
   </div>
 
 </body>
 </html>
+

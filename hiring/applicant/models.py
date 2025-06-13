@@ -58,3 +58,10 @@ class Application(models.Model):
     profile_pic=models.ImageField(upload_to='profileimg',blank=True)
     resume=models.FileField(upload_to='resume', blank=True)
     
+class Interview(models.Model):
+    candidate=models.ForeignKey(Application,on_delete=models.CASCADE)
+    scheduled_at = models.DateTimeField()
+    platform_link = models.URLField(blank=True, null=True)
+    status = models.CharField(max_length=20, default='Pending') 
+    message = models.TextField(blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
