@@ -40,6 +40,9 @@ INSTALLED_APPS = [
     'tailwind',
     'theme',
     'applicant',
+    'account',
+    'recruiter',
+    'user',
     "widget_tweaks",
 
 ]
