@@ -134,3 +134,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #to use custom user model
 AUTH_USER_MODEL='account.user'
+SITE_DOMAIN='http://127.0.0.1:8000/'
+
+EMAIL_HOST = 'live.smtp.mailtrap.io'
+EMAIL_HOST_USER = 'api'
+EMAIL_HOST_PASSWORD = '9f71aea77add82df8ffd862e91e626a6'
+EMAIL_PORT = '587'
+EMAIL_USE_TLS=True
