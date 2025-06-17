@@ -8,7 +8,42 @@ from django.contrib.auth.tokens import default_token_generator
 from django.urls import reverse
 from .utils import send_activation_email
 from .models import User
-def login(request):
+from django.contrib.auth import authenticate,login
+
+def login_view(request):
+    if request.user.is_authenticated:
+       if request.user.is_recruiter:
+           return redirect('rDashboard')
+       elif request.user.is_applicant:
+           return redirect('dashboard')
+       return redirect('home')
+    
+    if request.method=='POST':
+        email=request.POST.get('email')
+        password=request.POST.get('password')
+
+        if not email or not password:
+            messages.error(request,"Both fields are required")
+            return redirect('login')
+        try:
+            user=User.objects.get(email=email)
+        except User.DoesNotExist:
+            messages.error(request,"Invalid Email or password")
+            return redirect('login')
+        
+        if not user.is_active:
+            messages.error(request,'Your account is inactive please activate it ')
+            return redirect('login')
+        user=authenticate(request,email=email,password=password)
+
+        if user is not None:
+            login(request,user)
+            if request.user.is_recruiter:
+              return redirect('rDashboard')
+            elif request.user.is_applicant:
+              return redirect('dashboard')
+        else:
+            messages.error(request,'Invalid email or password')
     return render(request,'account/login.html')
 
 
