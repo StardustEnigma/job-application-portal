@@ -136,8 +136,14 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL='account.user'
 SITE_DOMAIN='http://127.0.0.1:8000/'
 
-EMAIL_HOST = 'live.smtp.mailtrap.io'
-EMAIL_HOST_USER = 'api'
-EMAIL_HOST_PASSWORD = '9f71aea77add82df8ffd862e91e626a6'
-EMAIL_PORT = '587'
-EMAIL_USE_TLS=True
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'atharvamandle19@gmail.com'  # your Gmail
+EMAIL_HOST_PASSWORD = 'hcgh yfax rial dbbz'  # the app password generated
+
+
+LOGIN_REDIECT_URL='login'
+LOGIN_URL= 'login'
+# hcgh yfax rial dbbz
