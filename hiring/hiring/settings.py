@@ -141,7 +141,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'atharvamandle19@gmail.com'  # your Gmail
-EMAIL_HOST_PASSWORD = 'hcgh yfax rial dbbz'  # the app password generated
+
 
 
 LOGIN_REDIECT_URL='login'
