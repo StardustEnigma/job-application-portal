@@ -2,6 +2,12 @@ from django import forms
 from .models import User
 
 class registerationForm(forms.ModelForm):
+    
+    Role_Choice=(
+        ('applicant','Applicant'),
+        ('recruiter','Recruiter')
+    )
+    role=forms.ChoiceField(choices=Role_Choice,widget=forms.Select)
     password=forms.CharField(widget=forms.PasswordInput)
     confirmPassword=forms.CharField(widget=forms.PasswordInput)
     class Meta:

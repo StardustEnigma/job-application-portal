@@ -54,6 +54,13 @@ def register_view(request):
             user=form.save(commit=False)
             user.set_password(form.cleaned_data['password'])
             user.is_active=False
+            role=request.POST.get('role')
+            if role=="recruiter":
+                user.is_recruiter=True
+                user.is_applicant=False
+            else:
+                user.is_recruiter=False
+                user.is_applicant=True
             user.save()
             uidb64=urlsafe_base64_encode(force_bytes(user.pk))
             token=default_token_generator.make_token(user)
