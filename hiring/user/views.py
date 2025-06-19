@@ -3,11 +3,12 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib import messages
 from django.contrib.auth import logout
 from django.contrib.auth import update_session_auth_hash
-from django.contrib.auth.decorators import login_required
+from core.decorators import login_and_role_required
 # Create your views here.
+@login_and_role_required("applicant")
 def dashboard(request):
     return render(request,'user/dashboard.html')
-@login_required
+@login_and_role_required
 def password_change_view(request):
     if request.method=='POST':
         form = PasswordChangeForm(user=request.user,data=request.POST)
