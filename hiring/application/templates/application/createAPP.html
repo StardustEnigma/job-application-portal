@@ -1,0 +1,118 @@
+{% extends "base.html" %}
+{% load form_filters %}
+{% block title %}Create Application{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto px-6 py-16">
+  <h2 class="text-3xl md:text-4xl font-bold text-blue-600 text-center">Post a New Job</h2>
+  <p class="mt-2 text-center text-gray-600">Fill out the form below to create a new job listing.</p>
+
+  {% if form.errors %}
+    <div class="mt-6 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+      <strong>There were some problems with your submission:</strong>
+      <ul class="list-disc list-inside text-sm mt-2">
+        {% for error in form.non_field_errors %}
+          <li>{{ error }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  {% endif %}
+
+  <form method="post" class="bg-white shadow-md rounded-lg mt-10 p-8 space-y-6">
+    {% csrf_token %}
+
+    <!-- Title -->
+    <div>
+      <label class="block font-semibold text-gray-700 mb-1" for="{{ form.title.id_for_label }}">Job Title</label>
+      {{ form.title|add_class:"w-full p-2 border border-gray-300 rounded transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:p-3" }}
+      {% for error in form.title.errors %}
+        <p class="text-sm text-red-600 mt-1">{{ error }}</p>
+      {% endfor %}
+    </div>
+
+    <!-- Description -->
+    <div>
+      <label class="block font-semibold text-gray-700 mb-1" for="{{ form.description.id_for_label }}">Description</label>
+      {{ form.description|add_class:"w-full p-2 border border-gray-300 rounded transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:p-3" }}
+      {% for error in form.description.errors %}
+        <p class="text-sm text-red-600 mt-1">{{ error }}</p>
+      {% endfor %}
+    </div>
+
+    <!-- Requirements -->
+    <div>
+      <label class="block font-semibold text-gray-700 mb-1" for="{{ form.requirements.id_for_label }}">Requirements</label>
+      {{ form.requirements|add_class:"w-full p-2 border border-gray-300 rounded transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:p-3" }}
+      {% for error in form.requirements.errors %}
+        <p class="text-sm text-red-600 mt-1">{{ error }}</p>
+      {% endfor %}
+    </div>
+
+    <!-- Location -->
+    <div>
+      <p class="block font-semibold text-gray-700 mb-2">Location</p>
+      <div class="space-y-2">
+        {% for radio in form.location %}
+          <label class="inline-flex items-center space-x-2 text-sm text-gray-700">
+            {{ radio.tag }}
+            <span>{{ radio.choice_label }}</span>
+          </label><br>
+        {% endfor %}
+        {% for error in form.location.errors %}
+          <p class="text-sm text-red-600 mt-1">{{ error }}</p>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Job Type -->
+    <div>
+      <p class="block font-semibold text-gray-700 mb-2">Job Type</p>
+      <div class="space-y-2">
+        {% for radio in form.job_type %}
+          <label class="inline-flex items-center space-x-2 text-sm text-gray-700">
+            {{ radio.tag }}
+            <span>{{ radio.choice_label }}</span>
+          </label><br>
+        {% endfor %}
+        {% for error in form.job_type.errors %}
+          <p class="text-sm text-red-600 mt-1">{{ error }}</p>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Salary Range -->
+    <div>
+      <label class="block font-semibold text-gray-700 mb-1" for="{{ form.salary_range.id_for_label }}">Salary Range</label>
+      {{ form.salary_range|add_class:"w-full p-2 border border-gray-300 rounded transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:p-3" }}
+      {% for error in form.salary_range.errors %}
+        <p class="text-sm text-red-600 mt-1">{{ error }}</p>
+      {% endfor %}
+    </div>
+
+    <!-- Openings -->
+    <div>
+      <label class="block font-semibold text-gray-700 mb-1" for="{{ form.openings.id_for_label }}">Openings</label>
+      {{ form.openings|add_class:"w-full p-2 border border-gray-300 rounded transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:p-3" }}
+      {% for error in form.openings.errors %}
+        <p class="text-sm text-red-600 mt-1">{{ error }}</p>
+      {% endfor %}
+    </div>
+
+    <!-- Deadline (Date Picker) -->
+    <div>
+      <label class="block font-semibold text-gray-700 mb-1" for="{{ form.deadline.id_for_label }}">Deadline</label>
+      {{ form.deadline|add_class:"w-full p-2 border border-gray-300 rounded transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500" }}
+      {% for error in form.deadline.errors %}
+        <p class="text-sm text-red-600 mt-1">{{ error }}</p>
+      {% endfor %}
+    </div>
+
+    <!-- Submit -->
+    <div class="text-center pt-4">
+      <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg transition duration-200">
+        Post Job
+      </button>
+    </div>
+  </form>
+</div>
+{% endblock %}

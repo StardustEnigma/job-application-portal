@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'recruiter',
     'user',
     "widget_tweaks",
-
+    'application'
 ]
 
 MIDDLEWARE = [
